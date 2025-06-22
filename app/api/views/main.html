@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% block title %}Random Phone Number{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row p-2 mb-4 mt-0 border shadow-lg" style="background-color:#ffffff;">
+    <!----- Form Box ------->
+    <div class="col-md-4 col-12 border"">
+      <div class=" row">
+      <div class="col-12">
+        <div class="text-center text-md-center mb-4">
+          <h1 class="mt-4 h4">
+            <a href="/">Random Phone Number</a>
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <form method="POST" action="/">
+          <div class="row">
+            <div class="form-group mb-4">
+              <label class="form-label">Quantity</label>
+              {{ form.quantity(class="form-control") }}
+              <div id="quantityHelp" class="form-text">The quantity of numbers (mininum is 1).</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group mb-4">
+                <label class="form-label">Prefix</label>
+                {{ form.prefix(class="form-control") }}
+                <div id="prefixHelp" class="form-text">The leading number wants to look like.</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group mb-4">
+                <label class="form-label">Duplication</label>
+                {{ form.duplication(class="form-control") }}
+                <div id="prefixHelp" class="form-text">The number of duplicate numbers allowed.</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group mb-4">
+                <label>Column Header</label>
+                {{ form.header(class="form-control") }}
+              </div>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center">
+            <div class="col-4 mb-4">
+              <button type="submit" class="btn btn-primary">Generate</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--close form box-->
+  <!---distribution box-->
+  <div class="col-md-3 col-12 border"">
+      <div class=" row p-2">
+    <div class="text-center text-md-center mb-4">
+      <h1 class="mt-4 mb-4 h5">
+        Distribution of Data
+      </h1>
+    </div>
+    <table class="table table-sm">
+      <tbody class="table table-bordered">
+        <tr>
+          <td>Total:</td>
+          <td class="table-secondary">{{session.get('distribution')['total']}}</td>
+        </tr>
+        <tr>
+          <td>Unique:</td>
+          <td class="table-primary">{{session.get('distribution')['unique']}}</td>
+        </tr>
+        <tr>
+          <td>Duplicate:</td>
+          <td class="table-warning">{{session.get('distribution')['duplicate']}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row p-2 mt-2">
+    <form method="POST" action="/reset">
+      <div class="row d-flex justify-content-center">
+        <div class="col-4 mb-4">
+          <button type="submit" class="btn btn-secondary">Reset</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!--close distribution box-->
+<!--result box-->
+<div class="col-md-5 col-12 border"">
+      <div class=" row">
+  <div class="col-12">
+    <small>Export to:</small>
+    <table id="dataTable" class="table table-striped table-responsive border table-hover" width="100%">
+      <thead>
+        <tr class="">
+          <th>{{ header }}</th>
+        </tr>
+      </thead>
+      <tbody class="table table-bordered">
+        {% if session.get('numbers') %}
+        {% with numbers = session.get('numbers') %}
+        {% for number in numbers %}
+        <tr>
+          <td>{{number}}</td>
+        </tr>
+        {% endfor %}
+        {% endwith %}
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+<!--close result box-->
+</div>
+<br><br><br><br><br>
+</div>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<!-- Message Modal -->
+<div class="modal fade modal" id="messageModal" tabindex="-1" aria-labelledby="messageModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">
+          {% if msg == 'success' %}
+          <font style="color: green;"><i class="fa-solid fa-circle-check"></i>
+            &ensp;Action Completed</font>
+          {% else %}
+          <font style="color: red;"><i class="fa-solid fa-circle-exclamation"></i>
+            &ensp;Action Failed</font>
+          {% endif %}
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!-- Message Modal Body --->
+      <div class="modal-body justify-content-md-center">
+        {% for message in messages %}
+        <p>{{message}}</p>
+        {% endfor %}
+      </div>
+      <!-- Close Message Modal Body --->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Close Message Modal -->
+{% endif %}
+{% endwith %}
+{% endblock %}
