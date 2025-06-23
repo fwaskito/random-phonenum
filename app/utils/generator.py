@@ -47,34 +47,34 @@ class RandomNumberGenerator:
             10: "822",  # Telkomsel | SIMPATI
             11: "823",  # Telkomsel | SIMPATI
             12: "831",  # XL SMART  | AXIS
-            13: "832",  # XL SMART  | AXIS
-            14: "833",  # XL SMART  | AXIS
-            15: "838",  # XL SMART  | AXIS
-            16: "851",  # Telkomsel | SIMPATI & by U
-            17: "852",  # Telkomsel | SIMPATI
-            18: "853",  # Telkomsel | SIMPATI
-            19: "855",  # Indosat   | IM3 Prabayar & Platinum
-            20: "856",  # Indosat   | IM3 Prabayar
-            21: "857",  # Indosat   | IM3 Prabayar
-            22: "858",  # Indosat   | IM3 Prabayar
-            23: "868",  # PSN/ACes
-            24: "877",  # XL SMART  | XL Prabayar
-            25: "878",  # XL SMART  | XL Prabayar
-            26: "879",  # XL SMART  | XL Prabayar
-            27: "881",  # XL SMART  | Smartfren
-            28: "882",  # XL SMART  | Smartfren
-            29: "883",  # XL SMART  | Smartfren
-            30: "884",  # XL SMART  | Smartfren
-            31: "885",  # XL SMART  | Smartfren
-            32: "886",  # XL SMART  | Smartfren
-            33: "887",  # XL SMART  | Smartfren
-            34: "888",  # XL SMART  | Smartfren
-            35: "889",  # XL SMART  | Smartfren
-            36: "895",  # Indosat   | 3
-            37: "896",  # Indosat   | 3
-            38: "897",  # Indosat   | 3
-            39: "898",  # Indosat   | 3
-            40: "899",  # Indosat   | 3
+            # 13: "832",  # XL SMART  | AXIS
+            # 14: "833",  # XL SMART  | AXIS
+            13: "838",  # XL SMART  | AXIS
+            14: "851",  # Telkomsel | SIMPATI & by U
+            15: "852",  # Telkomsel | SIMPATI
+            16: "853",  # Telkomsel | SIMPATI
+            17: "855",  # Indosat   | IM3 Prabayar & Platinum
+            18: "856",  # Indosat   | IM3 Prabayar
+            19: "857",  # Indosat   | IM3 Prabayar
+            20: "858",  # Indosat   | IM3 Prabayar
+            # 22: "868",  # PSN/ACes
+            21: "877",  # XL SMART  | XL Prabayar
+            22: "878",  # XL SMART  | XL Prabayar
+            # 26: "879",  # XL SMART  | XL Prabayar
+            23: "881",  # XL SMART  | Smartfren
+            24: "882",  # XL SMART  | Smartfren
+            # 29: "883",  # XL SMART  | Smartfren
+            # 27: "884",  # XL SMART  | Smartfren
+            # 28: "885",  # XL SMART  | Smartfren
+            # 32: "886",  # XL SMART  | Smartfren
+            25: "887",  # XL SMART  | Smartfren
+            26: "888",  # XL SMART  | Smartfren
+            27: "889",  # XL SMART  | Smartfren
+            28: "895",  # Indosat   | 3
+            29: "896",  # Indosat   | 3
+            30: "897",  # Indosat   | 3
+            31: "898",  # Indosat   | 3
+            32: "899",  # Indosat   | 3
         }
 
         return cell_num_codes[idx]
@@ -85,7 +85,7 @@ class RandomNumberGenerator:
         while len(phone_number_set) < n_uniques:
             phone_number = self._prefix
             # Indonesian cellular provider code
-            phone_number += self._get_cell_num_codes(random.randint(0, 40))
+            phone_number += self._get_cell_num_codes(random.randint(0, 32))
 
             # the other 8 numbers can be in the range of 0 to 9.
             for _ in range(8):
